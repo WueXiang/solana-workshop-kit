@@ -39,6 +39,24 @@ Type `/` to see the bundled skills — they also **auto-activate** based on what
 
 ---
 
+## 🔀 Pick your phase (agents)
+
+Press **`Tab`** in opencode to switch between agents. Alongside the built-in `build` and `plan`, this kit adds
+three phase agents (all pinned to the cheaper sonnet), so you can steer the session to the right stage:
+
+| Agent | Use it for | Leans on skills like |
+|---|---|---|
+| **`idea`** | discover & validate what to build | find-next-crypto-idea, validate-idea, competitive-landscape |
+| **`ship`** | scaffold, build, debug your app | scaffold-project, build-defi-protocol, debug-program |
+| **`launch`** | deploy, pitch, submit | deploy-to-mainnet, create-pitch-deck, submit-to-hackathon |
+
+- **In the TUI:** `Tab` cycles agents (current agent shows at the bottom).
+- **One-shot from the CLI:** `opencode run --agent idea "I want to build a DeFi app — what should I make?"`
+- Each phase agent is locked to `claude-sonnet-4-6`. To let the model picker choose instead, delete that
+  agent's `"model"` line in `opencode.json`.
+
+---
+
 ## 💸 Models & cost
 
 Your key is on a shared LiteLLM proxy with a **$25 budget**. Two models — **use Sonnet**, it's cheaper on every axis:
