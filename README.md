@@ -50,6 +50,10 @@ Your key is on a shared LiteLLM proxy with a **$25 budget**. Two models — **us
 
 The default in `opencode.json` is already set to Sonnet.
 
+> ⚠️ **opencode will show your cost as `$0.00`.** That's cosmetic — opencode can't price a custom proxy's
+> models, so it can't compute spend. You're still being billed against the $25 budget. Track real usage on
+> the proxy side, not opencode's display.
+
 ---
 
 ## 🧠 What you get — 32 skills
