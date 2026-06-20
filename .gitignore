@@ -1,4 +1,5 @@
-# Never commit real keys
+# Never commit your real key
+key.txt
 .env
 
 # OS / editor cruft

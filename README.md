@@ -18,10 +18,10 @@ opencode discovers them automatically when you run it from this folder — there
 git clone <THIS_REPO_URL> solana-workshop-kit
 cd solana-workshop-kit
 
-# 2. Set YOUR key (you each get your own — never share or commit it)
-export LITELLM_API_KEY=sk-...your-own-key...
+# 2. Add YOUR key — paste it into key.txt (you each get your own; never share it)
+cp key.txt.example key.txt        # then open key.txt and paste your sk-... key
 
-# 3. Run opencode FROM this folder (it auto-loads the skills + provider)
+# 3. Run opencode FROM this folder (it reads your key + skills + provider automatically)
 opencode
 ```
 
@@ -88,13 +88,13 @@ Just ask in plain English (*"scaffold my project"*, *"roast my product"*, *"depl
 
 ## 🔐 Key handling (important)
 
-- Your key is **personal**. The `.env` file is **gitignored** — never commit a real key.
-- **Set the key in the same shell you launch `opencode` from.** opencode does **not** prompt for a missing key —
-  if `LITELLM_API_KEY` is unset it becomes an empty string and every request just returns a confusing **401**.
-  A new terminal tab loses the export, so re-set it there.
-- Easiest: `export LITELLM_API_KEY=sk-...`. Or copy `.env.example` → `.env`, fill it in, then
-  `set -a && source .env && set +a` (opencode does **not** auto-load `.env`, so you must source it yourself).
-- `opencode.json` references the key as `{env:LITELLM_API_KEY}` — the key itself is never stored in this repo.
+- Your key is **personal**. Put it in **`key.txt`** (copy `key.txt.example` → `key.txt`, paste your `sk-...` key).
+- `key.txt` is **gitignored**, so your key is never committed. `opencode.json` reads it via `{file:./key.txt}`,
+  so the key never lives in any tracked file.
+- **No `export`, no `.env`, no shell setup.** opencode reads `key.txt` directly every time you launch it from
+  this folder — set it once and it persists with the kit. (opencode does not read `.env` files.)
+- Prefer an environment variable instead? Change `opencode.json`'s `apiKey` to `{env:LITELLM_API_KEY}` and
+  `export LITELLM_API_KEY=sk-...` in the same shell before running opencode.
 
 ---
 
@@ -102,12 +102,12 @@ Just ask in plain English (*"scaffold my project"*, *"roast my product"*, *"depl
 
 ```
 solana-workshop-kit/
-├── opencode.json          # litellm provider + default model (sonnet)
+├── opencode.json          # litellm provider + default model (sonnet), reads key.txt
 ├── .claude/
 │   ├── skills/            # all 32 skills (auto-discovered by opencode)
 │   └── data/              # shared knowledge base the skills read
-├── .env.example           # key placeholder
-├── .gitignore             # ignores .env
+├── key.txt.example        # copy to key.txt and paste your key
+├── .gitignore             # ignores key.txt (your secret)
 └── README.md
 ```
 
@@ -119,7 +119,7 @@ edits your `~/.claude/settings.json`. Delete the folder and it's gone. opencode 
 
 ## 🆘 Troubleshooting
 
-- **401 / auth error** → `LITELLM_API_KEY` is empty or unset in the shell you launched opencode from. opencode does **not** prompt — an unset var silently becomes an empty key. Re-run `export LITELLM_API_KEY=sk-...` in **that same terminal**, then `opencode`.
+- **401 / "No api key passed in"** → your `key.txt` is missing or empty. Create it (`cp key.txt.example key.txt`), paste your `sk-...` key, save, then **restart opencode** (it reads the key at startup). The file should contain nothing but the key.
 - **Provider/model missing** → run `opencode` from **inside** this repo (or a subfolder of it) so it picks up this repo's `opencode.json`.
 - **Skills not showing** → make sure the folder is a git repo (a clone always is) and you're inside it; opencode finds `.claude/skills/` by walking up to the git root.
 - **Catalog lookups** → solana.new's public bundle omits the `data/catalogs/*.json` ecosystem catalogs, so `navigate-skills` / `competitive-landscape` fall back to live web search — same behaviour as the official install.
