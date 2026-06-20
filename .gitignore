@@ -2,6 +2,9 @@
 key.txt
 .env
 
+# Local test / scratch projects scaffolded while trying the kit (not part of the kit)
+simple-amm/
+
 # OS / editor cruft
 .DS_Store
 *.log
