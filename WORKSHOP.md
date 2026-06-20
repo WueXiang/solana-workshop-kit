@@ -33,10 +33,9 @@ You should see a version like `1.17.8`.
 ## 2. Get the kit
 
 ```bash
-git clone <KIT_URL> solana-workshop-kit
+git clone https://github.com/JingYuan0926/solana-workshop-kit.git
 cd solana-workshop-kit
 ```
-*(Your organizer will give you the real `<KIT_URL>`.)*
 
 ---
 

@@ -15,7 +15,7 @@ opencode discovers them automatically when you run it from this folder — there
 
 ```bash
 # 1. Clone
-git clone <THIS_REPO_URL> solana-workshop-kit
+git clone https://github.com/JingYuan0926/solana-workshop-kit.git
 cd solana-workshop-kit
 
 # 2. Add YOUR key — paste it into key.txt (you each get your own; never share it)
